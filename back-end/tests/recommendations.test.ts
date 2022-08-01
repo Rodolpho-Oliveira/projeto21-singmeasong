@@ -50,9 +50,9 @@ describe("Downvote recommendation", () => {
     })
 
     it("Remove a recommendation if score is less than -5 and return status 200", async () => {
-        const response = await supertest(app).post("/recommendations/3/downvote")
+        const response = await supertest(app).post("/recommendations/6/downvote")
         const recommendation = await prisma.recommendation.findUnique({
-			where:{ id: 3},
+			where:{ id: 6},
 		})
         expect(recommendation).toBeNull()
         expect(response.status).toEqual(200)
