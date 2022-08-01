@@ -26,6 +26,10 @@ module.exports = {
     "rules": {
         "semi": ["error", "always"],
         "quotes": ["error", "double"],
-        "jest/expect-expect": "off"
+        "import/prefer-default-export": "off",
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-filename-extension": "off",
+        "react/prop-types": "off",
+        "react/jsx-props-no-spreading": "off"
     }
 };
