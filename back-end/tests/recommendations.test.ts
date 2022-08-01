@@ -39,22 +39,61 @@ describe("Upvote recommendation", () => {
 })
 
 describe("Downvote recommendation", () => {
-    it("Downvote a recommendation and return status 200", async () => {
+    it("Downvote a recommendation and return status 200 and return status 200", async () => {
         const response = await supertest(app).post("/recommendations/1/downvote")
         expect(response.status).toEqual(200)
     })
 
-    it("Try to downvote a recommendation that doesnt exist", async () => {
+    it("Try to downvote a recommendation that doesnt exist and return status 404", async () => {
         const response = await supertest(app).post("/recommendations/9999/downvote")
         expect(response.status).toEqual(404)
     })
 
-    it("Remove a recommendation if score is less than -5", async () => {
+    it("Remove a recommendation if score is less than -5 and return status 200", async () => {
         const response = await supertest(app).post("/recommendations/3/downvote")
         const recommendation = await prisma.recommendation.findUnique({
 			where:{ id: 3},
 		})
         expect(recommendation).toBeNull()
         expect(response.status).toEqual(200)
+    })
+})
+
+describe("Get recommendations", () => {
+    it("Return last 10 recommendations and return status 200", async () => {
+        const response = await supertest(app).get("/recommendations/")
+        expect(response.status).toBe(200)
+    })
+
+    it("Return one recommendation by id and return status 200", async () => {
+        const response = await supertest(app).get("/recommendations/1")
+        expect(response.status).toBe(200)
+    })
+
+    it("Return no recommendation by id if doesnt exist and return status 404", async () => {
+        const response = await supertest(app).get("/recommendations/999")
+        expect(response.status).toBe(404)
+    })
+
+    it("Return a random recommendation and return status 200", async () => {
+        const response = await supertest(app).get("/recommendations/random")
+        expect(response.status).toBe(200)
+    })
+
+    it("Return no random recommendation if none exists and return status 404", async () => {
+        const response = await supertest(app).get("/recommendations/random")
+        expect(response.status).toBe(404)
+    })
+
+    it("Return a list of top recommendations and return status 200", async () => {
+        const response = await supertest(app).get("/recommendations/top/5")
+        expect(response.status).toBe(200)
+        expect(response.body).toHaveLength(5)
+    })
+
+    it("Return no top recommendation if doesnt exist and return status 404", async () => {
+        const response = await supertest(app).get("/recommendations/top/5")
+        expect(response.status).toBe(404)
+        expect(response.body).toBe([])
     })
 })
