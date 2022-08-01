@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+/* global cy */
 import { faker } from "@faker-js/faker"
 
 const URL = "http://localhost:5000"
