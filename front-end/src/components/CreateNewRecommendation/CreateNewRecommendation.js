@@ -14,7 +14,7 @@ export default function CreateNewRecommendation({ onCreateNewRecommendation = ()
     });
     setLink("");
     setName("");
-  }
+  };
   
   return (
     <Container>

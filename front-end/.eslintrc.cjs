@@ -1,24 +1,31 @@
 module.exports = {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "cypress/globals": true,
+        "node": true
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "plugin:cypress/recommended"
     ],
     "parserOptions": {
         "ecmaFeatures": {
-            "jsx": true
+            "jsx": false,
+            "experimentalObjectRestSpread": true
         },
         "ecmaVersion": "latest",
-        "sourceType": "module"
+        "sourceType": "module",
+        
     },
     "plugins": [
-        "react"
+        "react",
+        "cypress",
     ],
     "rules": {
-        "semi": ["error", "never"],
-        "quotes": ["error", "double"]
+        "semi": ["error", "always"],
+        "quotes": ["error", "double"],
+        "jest/expect-expect": "off"
     }
-}
+};

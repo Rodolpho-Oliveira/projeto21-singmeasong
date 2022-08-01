@@ -13,7 +13,7 @@ const LazyWrapper = (Component) => (props) => (
   <Suspense fallback={<Loading />}>
     <Component {...props} />
   </Suspense>
-)
+);
 
 const Timeline = LazyWrapper(lazy(() => import("./pages/Timeline")));
 const Home = LazyWrapper(lazy(() => import("./pages/Timeline/Home")));
@@ -32,5 +32,5 @@ export default function App() {
         </Route>
       </Routes>
     </Router>
-  )
+  );
 }
